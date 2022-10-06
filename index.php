@@ -2,40 +2,39 @@
 $dataJson = file_get_contents("https://englishapi.xynie.com/app-api/v1/photo-gallery-feed-page/page/1");
 
 $jsonArr = json_decode($dataJson, 1);
-function dateAgo($ipTime) 
-    {
-            $curTime = time();
-            $diffS = $curTime - $ipTime;
-            $strTime = '';
-            if($diffS < 20) {
-                    $strTime = 'few seconds ago';
-            } else if($diffS < 60) {
-                    $strTime = $diffS.' seconds ago';
-            } else if($diffS < (60*3)) {
-                    $strTime = 'few minutes ago';
-            } else if($diffS < (60*60)) {
-                    $strTime = floor($diffS/60).' minutes ago';
-            } else if($diffS < (60*60*12)) {
-                    $hrs = floor(($diffS/3600));
-                    if($hrs == 1) {
-                            $strTime = $hrs.' hour ago';
-                    } else {
-                            $strTime = $hrs.' hours ago';
-                    }
+function dateAgo($ipTime) {
+    $curTime = time();
+    $diffS = $curTime - $ipTime;
+    $strTime = '';
+    if($diffS < 20) {
+            $strTime = 'few seconds ago';
+    } else if($diffS < 60) {
+            $strTime = $diffS.' seconds ago';
+    } else if($diffS < (60*3)) {
+            $strTime = 'few minutes ago';
+    } else if($diffS < (60*60)) {
+            $strTime = floor($diffS/60).' minutes ago';
+    } else if($diffS < (60*60*12)) {
+            $hrs = floor(($diffS/3600));
+            if($hrs == 1) {
+                    $strTime = $hrs.' hour ago';
             } else {
-                    $day 	= date("j", $ipTime);
-                    $month 	= date("n", $ipTime);
-                    $year 	= date("Y", $ipTime);
-                    if($day ==  date("j") && $month ==  date("n") && $year ==  date("Y")) {
-                            $strTime = 'Today '.date(", g:i a", $ipTime);
-                    } else if($year ==  date("Y")) {
-                            $strTime = date("j M Y, g:i a", $ipTime);
-                    } else {
-                            $strTime = date("j M Y, g:i a", $ipTime);
-                    }
+                    $strTime = $hrs.' hours ago';
             }
-            return $strTime;
+    } else {
+            $day 	= date("j", $ipTime);
+            $month 	= date("n", $ipTime);
+            $year 	= date("Y", $ipTime);
+            if($day ==  date("j") && $month ==  date("n") && $year ==  date("Y")) {
+                    $strTime = 'Today '.date(", g:i a", $ipTime);
+            } else if($year ==  date("Y")) {
+                    $strTime = date("j M Y, g:i a", $ipTime);
+            } else {
+                    $strTime = date("j M Y, g:i a", $ipTime);
+            }
     }
+    return $strTime;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
